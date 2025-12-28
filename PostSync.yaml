@@ -17,7 +17,7 @@ spec:
         command: 
           - "sh"
           - "-c"
-          - "curl -f my-app-service.default.svc.cluster.local || exit 1"
+          - "sleep 90 || exit 1"
       restartPolicy: Never
   # If this fails, the entire Argo CD Sync operation is marked as Failed
   backoffLimit: 0 
