@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: post-sync-smoke-test-
+  annotations:
+    # 1. Phase: Run ONLY after the app is healthy
+    argocd.argoproj.io/hook: PostSync
+    
+    # 2. Cleanup: Delete the job if it passes to avoid cluster clutter
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: smoke-test
+        image: curlimages/curl:latest
+        command: 
+          - "sh"
+          - "-c"
+          - "curl -f my-app-service.default.svc.cluster.local || exit 1"
+      restartPolicy: Never
+  # If this fails, the entire Argo CD Sync operation is marked as Failed
+  backoffLimit: 0 
