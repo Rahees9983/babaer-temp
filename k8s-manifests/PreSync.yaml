@@ -1,0 +1,36 @@
+# Wave 0: PreSync Hook
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vm-metrics-app-presync
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  template:
+    spec:
+      containers:
+      - name: presync
+        image: busybox
+        command: 
+        - sh
+        - -c
+        - |
+          echo "============================================"
+          echo "       PRESYNC HOOK - WAVE 0               "
+          echo "============================================"
+          echo ""
+          echo "Time: $(date)"
+          echo ""
+          echo "Step 1: Checking database connection..."
+          sleep 10
+          echo "Step 2: Running database migrations..."
+          sleep 10
+          echo "Step 3: Validating configuration..."
+          sleep 10
+          echo ""
+          echo "PreSync completed successfully!"
+          echo "============================================"
+      restartPolicy: Never
+  backoffLimit: 1
