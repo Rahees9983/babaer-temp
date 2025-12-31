@@ -1,0 +1,62 @@
+# Guesta Application Deployment
+# This app serves files from root paths: /lib/*, /js/*, /images/*
+# ALB Ingress rewrites /guesta/* -> /*
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guesta
+  namespace: demo-app
+  labels:
+    app: guesta
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: guesta
+  template:
+    metadata:
+      labels:
+        app: guesta
+    spec:
+      containers:
+      - name: guesta
+        image: rahees9983/guesta:v5
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: guesta-service
+  namespace: demo-app
+  labels:
+    app: guesta
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: guesta
+

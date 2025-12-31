@@ -1,0 +1,35 @@
+# ALB Ingress - Single ingress for path-based routing with URL Rewriting
+# Host: alb-tsdlsxgq4otc9zrn6h.me-central-1.alb.aliyuncsslbintl.com
+# Routes:
+#   /guesth/* -> guesth-service (ALB strips /guesth prefix)
+#   /guesta/* -> guesta-service-cip (ALB strips /guesta prefix)
+# Using rewrite-target with regex capture groups
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: guest-apps-ingress
+  namespace: demo-app
+  annotations:
+    alb.ingress.kubernetes.io/use-regex: "true"
+    alb.ingress.kubernetes.io/rewrite-target: /${2}
+spec:
+  ingressClassName: alb
+  rules:
+  - host: alb-tsdlsxgq4otc9zrn6h.me-central-1.alb.aliyuncsslbintl.com
+    http:
+      paths:
+      - path: /guesth(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: guesth-service
+            port:
+              number: 80
+      - path: /guesta(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: guesta-service-cip
+            port:
+              number: 80
