@@ -40,7 +40,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: alicloud-disk-topology-alltype
+  storageClassName: alicloud-disk-essd
   resources:
     requests:
       storage: 22Gi
