@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: guesth
-        image: rahees9983/guesth:v5
+        image: rahees9983/guesth:v7
         ports:
         - containerPort: 80
         resources:
