@@ -32,7 +32,7 @@ spec:
       source:
         # Replace with your Git repository URL
         repoURL: https://github.com/Rahees9983/babaer-temp.git
-        targetRevision: HEAD
+        targetRevision: dev
         path: '{{repoPath}}'
       destination:
         server: https://kubernetes.default.svc

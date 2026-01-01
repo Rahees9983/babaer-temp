@@ -30,7 +30,7 @@ spec:
       source:
         repoURL: https://github.com/Rahees9983/babaer-temp.git
         targetRevision: dev
-        path: apps/app-blue
+        path: argocd-applicationset-demo/apps/app-blue
       destination:
         # {{server}} is the cluster's API server URL
         server: '{{server}}'

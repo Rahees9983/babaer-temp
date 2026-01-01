@@ -14,8 +14,8 @@ spec:
       repoURL: https://github.com/Rahees9983/babaer-temp.git
       revision: dev
       directories:
-      # This will find all directories under apps/
-      - path: apps/*
+      # This will find all directories under argocd-applicationset-demo/apps/
+      - path: argocd-applicationset-demo/apps/*
   template:
     metadata:
       # {{path.basename}} = directory name (app-blue, app-green, app-red)
@@ -28,7 +28,7 @@ spec:
       source:
         repoURL: https://github.com/Rahees9983/babaer-temp.git
         targetRevision: dev
-        # {{path}} = full path (apps/app-blue, apps/app-green, etc.)
+        # {{path}} = full path (argocd-applicationset-demo/apps/app-blue, argocd-applicationset-demo/apps/app-green, etc.)
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc

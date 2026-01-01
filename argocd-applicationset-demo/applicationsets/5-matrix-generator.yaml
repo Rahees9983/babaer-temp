@@ -1,6 +1,6 @@
 # ApplicationSet Example 5: Matrix Generator
 # Combines two generators to create a cartesian product
-# Example: 3 apps x 3 environments = 9 Applications!
+# Example: 3 argocd-applicationset-demo/apps x 3 environments = 9 Applications!
 
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -12,12 +12,12 @@ spec:
   # Matrix generator - combines generators
   - matrix:
       generators:
-      # First generator: Git directories (apps)
+      # First generator: Git directories (argocd-applicationset-demo/apps)
       - git:
           repoURL: https://github.com/Rahees9983/babaer-temp.git
           revision: dev
           directories:
-          - path: apps/*
+          - path: argocd-applicationset-demo/apps/*
       # Second generator: List of environments
       - list:
           elements:

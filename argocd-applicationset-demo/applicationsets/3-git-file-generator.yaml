@@ -14,8 +14,8 @@ spec:
       repoURL: https://github.com/Rahees9983/babaer-temp.git
       revision: dev
       files:
-      # Read all config.json files under apps/*/
-      - path: "apps/*/config.json"
+      # Read apps.json config file (separate from k8s manifests)
+      - path: "argocd-applicationset-demo/config/apps.json"
   template:
     metadata:
       name: '{{name}}'
