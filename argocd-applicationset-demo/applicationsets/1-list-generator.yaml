@@ -14,13 +14,13 @@ spec:
       elements:
       - appName: app-blue
         namespace: demo-blue
-        repoPath: apps/app-blue
+        repoPath: argocd-applicationset-demo/apps/app-blue
       - appName: app-green
         namespace: demo-green
-        repoPath: apps/app-green
+        repoPath: argocd-applicationset-demo/apps/app-green
       - appName: app-red
         namespace: demo-red
-        repoPath: apps/app-red
+        repoPath: argocd-applicationset-demo/apps/app-red
   template:
     metadata:
       name: '{{appName}}'
