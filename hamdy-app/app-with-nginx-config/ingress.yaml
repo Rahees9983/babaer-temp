@@ -1,9 +1,11 @@
 # ALB Ingress - Single ingress for path-based routing with URL Rewriting
 # Host: alb-tsdlsxgq4otc9zrn6h.me-central-1.alb.aliyuncsslbintl.com
 # Routes:
+#   /guesth (exact) -> redirect to /guesth/
+#   /guesta (exact) -> redirect to /guesta/
 #   /guesth/* -> guesth-service (ALB strips /guesth prefix)
 #   /guesta/* -> guesta-service-cip (ALB strips /guesta prefix)
-# Using rewrite-target with regex capture groups
+# Using rewrite-target with regex capture groups and redirect actions
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -13,12 +15,41 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/use-regex: "true"
     alb.ingress.kubernetes.io/rewrite-target: /${2}
+    # Redirect /guesth to /guesth/
+    alb.ingress.kubernetes.io/actions.redirect-guesth: |
+      [{"type":"Redirect","RedirectConfig":{"host":"${host}","path":"/guesth/","port":"${port}","protocol":"${protocol}","query":"${query}","httpCode":"301"}}]
+    # Redirect /guesta to /guesta/
+    alb.ingress.kubernetes.io/actions.redirect-guesta: |
+      [{"type":"Redirect","RedirectConfig":{"host":"${host}","path":"/guesta/","port":"${port}","protocol":"${protocol}","query":"${query}","httpCode":"301"}}]
+    # Condition to match exact /guesth path
+    alb.ingress.kubernetes.io/conditions.redirect-guesth: |
+      [{"type":"Path","pathConfig":{"values":["/guesth"]}}]
+    # Condition to match exact /guesta path
+    alb.ingress.kubernetes.io/conditions.redirect-guesta: |
+      [{"type":"Path","pathConfig":{"values":["/guesta"]}}]
 spec:
   ingressClassName: alb
   rules:
   - host: alb-tsdlsxgq4otc9zrn6h.me-central-1.alb.aliyuncsslbintl.com
     http:
       paths:
+      # Redirect exact /guesth to /guesth/
+      - path: /guesth
+        pathType: Exact
+        backend:
+          service:
+            name: redirect-guesth
+            port:
+              name: use-annotation
+      # Redirect exact /guesta to /guesta/
+      - path: /guesta
+        pathType: Exact
+        backend:
+          service:
+            name: redirect-guesta
+            port:
+              name: use-annotation
+      # Route /guesth/* with rewrite
       - path: /guesth(/|$)(.*)
         pathType: Prefix
         backend:
@@ -26,6 +57,7 @@ spec:
             name: guesth-service
             port:
               number: 80
+      # Route /guesta/* with rewrite
       - path: /guesta(/|$)(.*)
         pathType: Prefix
         backend:
