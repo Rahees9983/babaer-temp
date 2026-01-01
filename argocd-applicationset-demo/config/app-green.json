@@ -1,0 +1,7 @@
+{
+  "name": "app-green",
+  "namespace": "demo-green",
+  "path": "argocd-applicationset-demo/apps/app-green",
+  "environment": "staging",
+  "replicas": 1
+}
