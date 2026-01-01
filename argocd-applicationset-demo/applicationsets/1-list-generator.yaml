@@ -31,8 +31,8 @@ spec:
       project: default
       source:
         # Replace with your Git repository URL
-        repoURL: https://github.com/YOUR_USERNAME/argocd-applicationset-demo.git
-        targetRevision: HEAD
+        repoURL: https://github.com/Rahees9983/babaer-temp.git
+        targetRevision: dev
         path: '{{repoPath}}'
       destination:
         server: https://kubernetes.default.svc

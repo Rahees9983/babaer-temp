@@ -14,8 +14,8 @@ spec:
       generators:
       # First generator: Git directories (apps)
       - git:
-          repoURL: https://github.com/YOUR_USERNAME/argocd-applicationset-demo.git
-          revision: HEAD
+          repoURL: https://github.com/Rahees9983/babaer-temp.git
+          revision: dev
           directories:
           - path: apps/*
       # Second generator: List of environments
@@ -38,8 +38,8 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/YOUR_USERNAME/argocd-applicationset-demo.git
-        targetRevision: HEAD
+        repoURL: https://github.com/Rahees9983/babaer-temp.git
+        targetRevision: dev
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc

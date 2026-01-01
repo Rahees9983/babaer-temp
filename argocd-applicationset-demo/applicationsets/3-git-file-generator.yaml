@@ -11,8 +11,8 @@ spec:
   generators:
   # Git file generator - reads config from files
   - git:
-      repoURL: https://github.com/YOUR_USERNAME/argocd-applicationset-demo.git
-      revision: HEAD
+      repoURL: https://github.com/Rahees9983/babaer-temp.git
+      revision: dev
       files:
       # Read all config.json files under apps/*/
       - path: "apps/*/config.json"
@@ -26,8 +26,8 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/YOUR_USERNAME/argocd-applicationset-demo.git
-        targetRevision: HEAD
+        repoURL: https://github.com/Rahees9983/babaer-temp.git
+        targetRevision: dev
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc

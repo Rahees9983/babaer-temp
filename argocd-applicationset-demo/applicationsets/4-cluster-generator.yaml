@@ -28,8 +28,8 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/YOUR_USERNAME/argocd-applicationset-demo.git
-        targetRevision: HEAD
+        repoURL: https://github.com/Rahees9983/babaer-temp.git
+        targetRevision: dev
         path: apps/app-blue
       destination:
         # {{server}} is the cluster's API server URL
