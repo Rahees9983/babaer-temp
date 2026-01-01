@@ -1,7 +1,0 @@
-{
-  "name": "app-green",
-  "namespace": "demo-green",
-  "path": "apps/app-green",
-  "environment": "staging",
-  "replicas": 1
-}

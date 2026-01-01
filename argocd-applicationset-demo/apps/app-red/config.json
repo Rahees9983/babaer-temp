@@ -1,7 +1,0 @@
-{
-  "name": "app-red",
-  "namespace": "demo-red",
-  "path": "apps/app-red",
-  "environment": "development",
-  "replicas": 1
-}

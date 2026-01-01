@@ -1,7 +1,0 @@
-{
-  "name": "app-blue",
-  "namespace": "demo-blue",
-  "path": "apps/app-blue",
-  "environment": "production",
-  "replicas": 2
-}
