@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Using generateName allows Argo CD to create a unique job for every sync
+  generateName: db-migration-
+  annotations:
+    # 1. Define the phase: This runs BEFORE the app manifests are applied
+    argocd.argoproj.io/hook: PreSync
+    
+    # 2. Define deletion policy: Automatically remove the job after it succeeds
+    # to keep your cluster clean.
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate
+        image: alpine:latest
+        command: ["sh", "-c", "echo 'Running DB migrations...'; sleep 90; echo 'Done!'"]
+      restartPolicy: Never
+  # If this job fails, Argo CD will stop the sync and mark it as failed
+  backoffLimit: 1 
