@@ -28,7 +28,7 @@ spec:
       source:
         repoURL: https://github.com/Rahees9983/babaer-temp.git
         targetRevision: dev
-        path: '{{aapPath}}'
+        path: '{{appPath}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
