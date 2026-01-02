@@ -1,5 +1,5 @@
 name: app-red
 namespace: demo-red
-path: argocd-applicationset-demo/apps/app-red
+appPath: argocd-applicationset-demo/apps/app-red
 environment: development
 replicas: 1

@@ -15,7 +15,7 @@ spec:
       revision: dev
       files:
       # Read individual config files (one per app)
-      - path: "argocd-applicationset-demo/config/*.json"
+      - path: "argocd-applicationset-demo/config/*.yaml"
   template:
     metadata:
       name: '{{name}}'
@@ -28,7 +28,7 @@ spec:
       source:
         repoURL: https://github.com/Rahees9983/babaer-temp.git
         targetRevision: dev
-        path: '{{path}}'
+        path: '{{aapPath}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
