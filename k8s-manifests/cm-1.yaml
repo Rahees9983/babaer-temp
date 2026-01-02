@@ -4,4 +4,4 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  name: cm-1
+  name: cm-2
