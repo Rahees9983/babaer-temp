@@ -11,12 +11,12 @@ spec:
   generators:
   # Cluster generator - deploys to all ArgoCD-registered clusters
   - clusters:
-      # Optional: filter clusters by labels
+      # Deploy to ALL clusters (comment out selector to include all)
+      # Or use selector to filter by labels
       selector:
         matchLabels:
-          # Only deploy to clusters with this label
-          # argocd.argoproj.io/secret-type: cluster
-          env: production
+          # env: production  # Uncomment to filter by environment
+          argocd.argoproj.io/secret-type: cluster  # Matches all external clusters
   template:
     metadata:
       # {{name}} = cluster name, {{server}} = cluster API server URL
@@ -41,3 +41,4 @@ spec:
           selfHeal: true
         syncOptions:
         - CreateNamespace=true
+
